@@ -1,0 +1,17 @@
+ubuntu:
+  Изображение: Ubuntu: дружественный
+  сценарий:
+  - apt-get update -qyy
+  - apt-get install -qyy curl bc make git build-essential
+  - Мерзавец клон https://github.com/assusdan/arm-cortex-linux-gnueabi-linaro_5.2
+  - PATH = $ PATH Экспорт: $ PWD / рычажного Cortex-Linux-gnueabi-linaro_5.2 / bin /
+  - Рычажного Cortex-Linux-gnueabi-НКУ --version
+  - KBUILD_BUILD_USER = Экспорт assusdan
+  - export KBUILD_BUILD_HOST=SRT
+  - export ARCH=arm 
+  - export CROSS_COMPILE=$PWD/arm-cortex-linux-gnueabi-linaro_5.2/bin/arm-cortex-linux-gnueabi- #тут тоже меняем путь к тулчейну, в зависимости от названия
+  - make -j2 blahblahblah_defconfig 1>/dev/null 
+  - make -j2  1>builds.log 2>errors.log 
+  - curl --upload-file builds.log https://transfer.sh/builds.log  |grep transfer
+  - curl --upload-file errors.log https://transfer.sh/errors.log  |grep transfer
+  - curl --upload-file arch/arm/boot/zImage-dtb https://transfer.sh/zImage-dtb |grep transfer
